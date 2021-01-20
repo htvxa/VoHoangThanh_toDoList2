@@ -17,13 +17,13 @@ function getListUser() {
 getListUser();
 
 getEle("addItem").addEventListener("click", function () {
-	var taskName = getEle("newTask").value;
+	var textTodo = getEle("newTask").value;
 	var isValid = true;
 	isValid &=
-		validation.kiemTraRong(taskName, "Task rong") &&
-		validation.kiemTraItem(taskName, "Trung ma", arr);
+		validation.kiemTraRong(textTodo, "Task rong") &&
+		validation.kiemTraItem(textTodo, "Trung ma", arr);
 	if (!isValid) return;
-	var task = new Task("", taskName);
+	var task = new Task("", textTodo);
 	taskList
 		.addTask(task)
 		.then(function (rs) {
@@ -48,12 +48,12 @@ function deleteToDo(id) {
 async function changeStatus(id) {
 	var getUser = await taskList.getUserById(id);
 	var taskChange = getUser.data;
-	if (taskChange.status !== false) {
-		taskChange.status = false;
+	// Vì dữ liệu tạo tự động sẽ có dạng status : "status {id}" nên nó sẽ không hiển thị nên ở đây ta cho dữ liệu nếu k phải là "completed" thì ở loại 1("todo").
+	if (taskChange.status !== "completed") {
+		taskChange.status = "completed";
 	} else {
-		taskChange.status = true;
+		taskChange.status = "todo";
 	}
-	isLoading = true;
 	taskList
 		.updateTask(taskChange)
 		.then(function (rs) {
@@ -72,9 +72,9 @@ function taoList(list) {
 	list &&
 		list.length > 0 &&
 		list.forEach(function (item) {
-			false === item.status
+			"completed" !== item.status
 				? ((t += taoTask(item)), (getEle("todo").innerHTML = t))
-				: true === item.status &&
+				: "completed" === item.status &&
 				  ((n += taoTask(item)), (getEle("completed").innerHTML = n));
 		});
 }
@@ -82,7 +82,7 @@ function taoList(list) {
 function taoTask(task) {
 	return `
     <li>
-    <span>${task.taskName}</span>
+    <span>${task.textTodo}</span>
     <div class="buttons">
       <button class="remove" onclick="deleteToDo(${task.id})">
         <i class="fa fa-trash-alt"></i>

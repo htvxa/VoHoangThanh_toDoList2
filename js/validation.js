@@ -9,7 +9,7 @@ function Validation() {
 	this.kiemTraItem = function (input, mess, arr) {
 		var check = true;
 		arr.forEach(function (item) {
-			if (input === item.taskName) {
+			if (input === item.textTodo) {
 				//Sai
 				check = false;
 			}

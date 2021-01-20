@@ -2,34 +2,34 @@ function TaskList() {
 	this.arr = [];
 	this.getListUser = function () {
 		return axios({
-			url: "https://600182b108587400174dad65.mockapi.io/api/ToDoList",
+			url: "https://5a6451dcf2bae00012ca1a6a.mockapi.io/api/todo",
 			method: "GET",
 		});
 	};
 	this.addTask = function (task) {
 		return axios({
-			url: `https://600182b108587400174dad65.mockapi.io/api/ToDoList/${task.id}`,
+			url: `https://5a6451dcf2bae00012ca1a6a.mockapi.io/api/todo/${task.id}`,
 			method: "POST",
 			data: task,
 		});
 	};
 	this.deleteTask = function (id) {
 		return axios({
-			url: `https://600182b108587400174dad65.mockapi.io/api/ToDoList/${id}`,
+			url: `https://5a6451dcf2bae00012ca1a6a.mockapi.io/api/todo/${id}`,
 			method: "DELETE",
 		});
 	};
 
 	this.updateTask = function (user) {
 		return axios({
-			url: `https://600182b108587400174dad65.mockapi.io/api/ToDoList/${user.id}`,
+			url: `https://5a6451dcf2bae00012ca1a6a.mockapi.io/api/todo/${user.id}`,
 			method: "PUT",
 			data: user,
 		});
 	};
 	this.getUserById = function (id) {
 		return axios({
-			url: `https://600182b108587400174dad65.mockapi.io/api/ToDoList/${id}`,
+			url: `https://5a6451dcf2bae00012ca1a6a.mockapi.io/api/todo/${id}`,
 			method: "GET",
 		});
 	};
